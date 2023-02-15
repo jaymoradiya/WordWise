@@ -1,0 +1,4 @@
+<app-question *ngFor="let question of questions" 
+[question]="question" 
+(click)="onQuestionSelect(question)" 
+[ngClass]="{active: selectedQuestion?.answer === question.answer}"></app-question>

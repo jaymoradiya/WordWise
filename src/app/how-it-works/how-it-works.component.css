@@ -1,0 +1,13 @@
+div {
+    display: flex;
+    justify-content: start;
+}
+
+app-questions-list {
+    width: 40%;
+    margin-right: 40px;
+}
+
+.answer {
+    width: 50%
+}

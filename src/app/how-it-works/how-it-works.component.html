@@ -1,0 +1,7 @@
+<div >
+    <app-questions-list (onQuestionSelected)="setAnswer($event)"></app-questions-list>
+    <div class="answer">
+        <router-outlet></router-outlet>
+    </div>
+    <!-- <app-answer [answer]="answer" *ngIf="answer"></app-answer> -->
+</div>
