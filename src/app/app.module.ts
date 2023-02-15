@@ -16,17 +16,7 @@ import { AnswerComponent } from './how-it-works/answer/answer.component';
 import { QuestionComponent } from './how-it-works/questions-list/question/question.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
-const routes: Routes = [
-  {path: "", component: HomePageComponent},
-  {path: "translate-it", component: TranslateContainerComponent},
-  {path: "questions", component: HowItWorksComponent,
-  children: [
-    {path: ":id", component: AnswerComponent},
-  ]},
-  {path: "pricing", component: PricingComponent},
-  {path: "page-not-found", component: PageNotFoundComponent},
-  {path: "**", redirectTo: "page-not-found"},
-];
+
 
 @NgModule({
   declarations: [
@@ -45,8 +35,7 @@ const routes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
-    // AppRoutingModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
