@@ -1,5 +1,11 @@
-<div class="container">
-    <button type="button" value="">Upload file</button>
+<div class="container" draggable="true" ngClass="{{dragAreaClass}}">
+    <!-- <input type="file" value="Upload file"id="Upload file" name="Upload file"> -->
+    <div id="paste-capture-area" contenteditable="true" #captureArea></div>
+    <div class="file">
+        <label for="file-input">Upload file</label>
+        <input type="file" id="file-input"  accept=".yml,.arb,.xml," #fileInput (change)="onFileChange($event)">
+    </div>
     <div class="body-text-2">or drop a file</div>
     <div class="body-text-1">paste a file or <span class="underline">URL</span></div>
+    <iframe  [ngClass]="previewFileClass()" class="preview-file" #previewFile></iframe>
 </div>

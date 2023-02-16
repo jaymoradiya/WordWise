@@ -15,6 +15,8 @@ import { QuestionsListComponent } from './how-it-works/questions-list/questions-
 import { AnswerComponent } from './how-it-works/answer/answer.component';
 import { QuestionComponent } from './how-it-works/questions-list/question/question.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { LoginComponent } from './auth/login/login.component';
+import { SignupComponent } from './auth/signup/signup.component';
 
 
 
@@ -32,6 +34,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     AnswerComponent,
     QuestionComponent,
     PageNotFoundComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
