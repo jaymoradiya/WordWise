@@ -1,0 +1,20 @@
+<form class="card-body" [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
+    <div class="input-group">
+        <label for="email" class="input-field-label">Email</label>
+        <input type="text" name="email" placeholder="Email" class="input-field" formControlName="email"/>
+        <div class="error-text" *ngIf="!loginForm?.get('email')?.valid && loginForm?.get('email')?.touched && loginForm?.get('email')?.dirty">Please enter valid email</div>
+    </div>
+    <div class="input-group">
+        <label for="password" class="input-field-label">Password</label>
+        <input type="text" name="password" placeholder="Password" class="input-field" formControlName="password"/>
+        <div class="error-text" *ngIf="!loginForm?.get('password')?.valid && loginForm?.get('password')?.touched && loginForm?.get('password')?.dirty">Password must be greater than 6 character</div>
+    </div>
+    <div class="input-group">
+        <input type="checkbox" name="rememberMe" class="input-checkbox" formControlName="rememberMe"/>
+        <label for="rememberMe" class="input-checkbox-label" >Remember me</label>
+    </div>
+    <input type="submit" value="Log in" class="btn">
+    <div class="login-info">
+        <p>This form is protected by hCaptcha and its <a href="#" class="link">Privacy Policy</a> and <a href="#" class="link">Terms of Service</a> apply.</p>
+    </div>
+</form>

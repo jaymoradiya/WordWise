@@ -12,7 +12,6 @@ export class HowItWorksComponent {
   answer: string ="";
 
   constructor(private router: Router, private route: ActivatedRoute){
-
   }
 
   setAnswer(question: any){

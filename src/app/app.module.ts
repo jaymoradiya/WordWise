@@ -17,6 +17,8 @@ import { QuestionComponent } from './how-it-works/questions-list/question/questi
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthComponent } from './auth/auth.component';
 
 
 
@@ -36,10 +38,13 @@ import { SignupComponent } from './auth/signup/signup.component';
     PageNotFoundComponent,
     LoginComponent,
     SignupComponent,
+    AuthComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
