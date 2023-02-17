@@ -14,6 +14,7 @@ header {
 }
 
 ul {
+    width: 100%;
     display: flex;
     align-items: center;
     font-size: larger;
@@ -35,14 +36,19 @@ li:first-child {
     line-height: 39px;
 }
 
+li:last-child {
+    margin: 0 32px 0 auto;
+}
+
 a {
     text-decoration: none;
     color: #545454;
 }
 
 a:hover:not(.logo) {
-    color: #2d2d2d;
-    font-weight: 600;
+    color: #0E70E7;
+    text-decoration: wavy;
+    /* font-weight: 600; */
 }
 
 /* hr {
