@@ -1,17 +1,22 @@
-
 <div class="container">
     <div class="page-title-wrapper">
         <div class="page-title">{{ authType == 'login' ? "Login with your Account" : "Create a new Account"}} </div>
-        <div class="page-info">{{ authType == 'login' ? "or create " : "or login with "}}  <a (click)="changeAuth(authType == 'login' ? 'signup' : 'login')" class="link">{{ authType == 'login' ? "new account" : "existing account"}} </a> {{ authType == 'login' ? "for free" : ""}}</div>
-    </div>    
-    <div class="card" >
+        <div class="page-info">{{ authType == 'login' ? "or create " : "or login with "}} <a
+                (click)="changeAuth(authType == 'login' ? 'signup' : 'login')" class="link">{{ authType == 'login' ?
+                "new account" : "existing account"}} </a> {{ authType == 'login' ? "for free" : ""}}</div>
+    </div>
+    <div class="card">
         <div class="nav-card-tabs">
             <a (click)="changeAuth('login')" class="nav-item" [ngClass]="{active: authType == 'login'}">Login</a>
-            <a (click)="changeAuth('signup')" class="nav-item"[ngClass]="{active: authType != 'login'}">Sign up</a>
+            <a (click)="changeAuth('signup')" class="nav-item" [ngClass]="{active: authType != 'login'}">Sign up</a>
+        </div>
+        <div class="response-card" [ngClass]="messageClasses(res)" *ngIf="response | async as res">
+            {{ res.message}}
+            <span class="close-btn" (click)="closeMessage()">x</span>
         </div>
         <router-outlet></router-outlet>
     </div>
     <div class="forgot-pass-btn" *ngIf="authType === 'login'">
         <a href="#" class="link">Forgot your password?</a>
-    </div>    
+    </div>
 </div>

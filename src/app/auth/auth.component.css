@@ -189,3 +189,36 @@
     text-decoration: underline;
 }
 
+.response-card {
+    display: none;
+}
+.response-card.visible {
+    height: 40px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-wrap: break-word;
+    padding: 4px 16px;
+}
+
+.response-card.success{
+    background-color: #d2fbd0;
+    color: #0d5f07;
+}
+.response-card.error{
+    background-color: #fbd0da;
+    color: #5f071c;
+}
+
+.response-card.success .close-btn,
+.response-card.error .close-btn  {
+    padding: 4px;
+    width: 24px;
+    height: 24px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   border-radius: 4px;
+   cursor: pointer;
+}

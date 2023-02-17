@@ -30,23 +30,33 @@ app.post('/signup', function (req, res) {
 
   if (!user.email){
     response.error = true;
-    response.message = "Email required";
-    res.send(response);
+    response.message = "email required";
+    return res.send(response);
   }
   if (!user.password){
     response.error = true;
-    response.message = "Password required";
-    res.send(response);
+    response.message = "password required";
+    return res.send(response);
   }
 
   try {
+
+    const savedUsers = USERS.find(u => u.email == user.email);
+    console.log(`saved users -> ${savedUsers}`);
+    if (savedUsers){
+      response.error = true;
+      response.message = "user already exists";
+      return res.send(response);
+    }
+
+
     USERS.push(new UserModel(user.email,user.password));
     
     response.error = false;
-    response.message = "User singUp successfully!";
+    response.message = "user created successfully!";
   } catch (error) {
     response.error = true;
-    response.message = "Something went wrong!";
+    response.message = "something went wrong!";
   }
   res.send(response);
 })
@@ -62,80 +72,35 @@ app.post('/login', function (req, res) {
 
   if (!user.email){
     response.error = true;
-    response.message = "Email required";
-    res.send(response);
+    response.message = "email required";
+    return res.send(response);
   }
   if (!user.password){
     response.error = true;
-    response.message = "Password required";
-    res.send(response);
+    response.message = "password required";
+    return res.send(response);
   }
 
   try {
     const savedUsers = USERS.find(u => u.email == user.email);
     if (!savedUsers){
       response.error = true;
-      response.message = "user doesn't exists";
-      res.send(response);
+      response.message = "user doesn't exists!";
+      return  res.send(response);
     }
 
     if(savedUsers.password == user.password){
       response.error = false;
-      response.message = "User sign successfully!";
+      response.message = "welcome to WordWise!";
       response.token = parseInt(Math.random() *1000);
     }else{
       response.error = true;
-      response.message = "Password incorrect!";
+      response.message = "incorrect password!";
     }
 
   } catch (error) {
     response.error = true;
-    response.message = "Something went wrong!";
-  }
-  res.send(response);
-})
-
-
-app.post('/login', function (req, res) {
-
-  const response = {};
-  
-  const user = {
-   'email': req.body.email,
-   'password':req.body.password,
-  }
-
-  if (!user.email){
-    response.error = true;
-    response.message = "Email required";
-    res.send(response);
-  }
-  if (!user.password){
-    response.error = true;
-    response.message = "Password required";
-    res.send(response);
-  }
-
-  try {
-    const savedUsers = USERS.find(u => u.email == user.email);
-    if (!savedUsers){
-      response.error = true;
-      response.message = "user doesn't exists";
-      res.send(response);
-    }
-
-    if(savedUsers.password == user.password){
-      response.error = false;
-      response.message = "User sign successfully!";
-      response.token = parseInt(Math.random() *1000);
-    }else{
-      response.error = true;
-      response.message = "Password incorrect!";
-    }
-
-  } catch (error) {
-    response.error = true;
-    response.message = "Something went wrong!";
+    response.message = "something went wrong!";
   }
   res.send(response);
 })

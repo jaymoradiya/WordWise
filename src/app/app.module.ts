@@ -19,6 +19,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
+import {  HttpClientModule} from "@angular/common/http";
 
 
 
@@ -45,6 +46,7 @@ import { AuthComponent } from './auth/auth.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
