@@ -6,5 +6,8 @@ export const CONFIG = {
         "SIGNUP": "/accounts:signUp",
         "RESET_PASS": "/accounts:resetPassword",
         "CONFIRM_PASS": "/accounts:resetPassword",
+    },
+    STRING: {
+        USER_DATA : 'userData',
     }
 }

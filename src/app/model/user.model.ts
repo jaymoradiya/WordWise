@@ -13,6 +13,16 @@ export class UserModel {
         }
         return this._token;
     }
+
+    static fromJson(json: any){
+        return new UserModel(
+            json['email'],
+            json['id'],
+            json['_token'],
+            json['_refreshToken'],
+           new Date(json['_expireAt']),
+        );
+    }
 }
 
 export interface UserAuthModel {

@@ -14,12 +14,15 @@ import { CoreHttpService } from '../../../shared/http/core-http.service';
 export class AuthService {
 
   user = new BehaviorSubject<UserModel | null>( null);
+  autoLogoutTimer :any;
+
   constructor(private httpCore: CoreHttpService) { }
 
   login(user: UserAuthModel): Observable<ResponseModel | null> {
     return this.httpCore.post<ResponseModel>(CONFIG.API.LOGIN, {
       "email": user.email,
       "password": user.password,
+      "returnSecureToken": true,
     }).pipe(
       map((res) => {
         let response = res.body;
@@ -33,10 +36,30 @@ export class AuthService {
     );
   }
 
+  autoLogin(){
+    const userData:{
+      email: string;
+      id: string;
+      _token: string;
+      _refreshToken: string;
+      _expireAt: string;
+    } = JSON.parse(localStorage.getItem(CONFIG.STRING.USER_DATA) ?? "{}");
+    if(!userData){
+      return;
+    }
+    const savedUser = UserModel.fromJson(userData);
+    if (savedUser.token){
+      const expirationTimeLeft = new Date(userData._expireAt).getTime() - new Date().getTime();
+      this.autoLogout(expirationTimeLeft);
+      this.user.next(savedUser);
+    }
+  }
+
   signup(user: UserAuthModel): Observable<ResponseModel | null> {
     return this.httpCore.post<ResponseModel>(CONFIG.API.SIGNUP, {
       "email": user.email,
       "password": user.password,
+      "returnSecureToken": true,
     }).pipe(
       map((res) => {
         let response = res.body;
@@ -52,6 +75,17 @@ export class AuthService {
 
   logout(){
     this.user.next(null);
+    localStorage.removeItem(CONFIG.STRING.USER_DATA);
+    if (this.autoLogoutTimer){
+      clearInterval(this.autoLogoutTimer);
+    }
+    this.autoLogoutTimer = null;
+  }
+
+  autoLogout(expirationTimeLeft: number){
+    this.autoLogoutTimer = setInterval(()=> {
+      this.logout();
+    },expirationTimeLeft);
   }
   
   resetPass(user: UserAuthModel): Observable<ResponseModel | null> {
@@ -87,6 +121,7 @@ export class AuthService {
   }
 
   handleAuthentication(response: ResponseModel){
+    console.log(response);
     const expirationDate = new Date(
       new Date().getTime() + (+response.expiresIn * 1000)
     )
@@ -97,6 +132,8 @@ export class AuthService {
       response.refreshToken,
       expirationDate,
     );
+    localStorage.setItem(CONFIG.STRING.USER_DATA,JSON.stringify(userData));
+    this.autoLogout(+response.expiresIn*1000);
     this.user.next(userData);
   }
 }
