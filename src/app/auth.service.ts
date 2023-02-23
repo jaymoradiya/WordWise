@@ -5,6 +5,7 @@ import { AuthType } from './model/auth.type.enum';
 import { Observable } from 'rxjs';
 import { ResponseModel } from './model/response.model';
 import { EventEmitter, Output } from '@angular/core';
+import {  CONFIG } from "../config/config";
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Question } from '../model/question.model';
 import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({

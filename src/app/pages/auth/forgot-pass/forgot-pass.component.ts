@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { AuthService } from 'src/app/auth.service';
-import { UserModel } from "../../model/user.model";
 import { NgForm } from '@angular/forms';
 import { AuthType } from 'src/app/model/auth.type.enum';
+import { UserModel } from 'src/app/model/user.model';
 
 @Component({
   selector: 'app-forgot-pass',

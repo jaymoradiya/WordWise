@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './home-page/home-page.component';
-import { AnswerComponent } from './how-it-works/answer/answer.component';
-import { HowItWorksComponent } from './how-it-works/how-it-works.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PricingComponent } from './pricing/pricing.component';
-import { TranslateContainerComponent } from './translate-container/translate-container.component';
-import { LoginComponent } from './auth/login/login.component';
-import { SignupComponent } from './auth/signup/signup.component';
-import { AuthComponent } from './auth/auth.component';
-import { ForgotPassComponent } from './auth/forgot-pass/forgot-pass.component';
-import { ChangePassComponent } from './auth/change-pass/change-pass.component';
+import { PricingComponent } from './pages/pricing/pricing.component';
 import { AuthType } from './model/auth.type.enum';
+import { AuthComponent } from './pages/auth/auth.component';
+import { ChangePassComponent } from './pages/auth/change-pass/change-pass.component';
+import { ForgotPassComponent } from './pages/auth/forgot-pass/forgot-pass.component';
+import { LoginComponent } from './pages/auth/login/login.component';
+import { SignupComponent } from './pages/auth/signup/signup.component';
+import { HomePageComponent } from './pages/home-page/home-page.component';
+import { AnswerComponent } from './pages/how-it-works/answer/answer.component';
+import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { TranslateContainerComponent } from './pages/translate-container/translate-container.component';
 
 const routes: Routes = [
   {path: "", component: HomePageComponent},

@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ResponseModel } from '../model/response.model';
-import { AuthService } from '../auth.service';
+import { ResponseModel } from '../../model/response.model';
+
 import { Observable } from 'rxjs';
-import { AuthType } from '../model/auth.type.enum';
-import { LanguageTransformPipe } from "../language-transform.pipe";
+import { AuthType } from 'src/app/model/auth.type.enum';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-auth',
