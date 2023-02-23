@@ -2,7 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserAuthModel, UserModel } from '../../../model/user.model';
 import { AuthType } from '../../../model/auth.type.enum';
-import { Observable, Subject, map } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, map } from 'rxjs';
 import { ResponseModel } from '../../../model/response.model';
 import { EventEmitter, Output } from '@angular/core';
 import {  CONFIG } from "../../../../config/config";
@@ -13,7 +13,7 @@ import { CoreHttpService } from '../../../shared/http/core-http.service';
 })
 export class AuthService {
 
-  user = new Subject<UserModel>();
+  user = new BehaviorSubject<UserModel | null>( null);
   constructor(private httpCore: CoreHttpService) { }
 
   login(user: UserAuthModel): Observable<ResponseModel | null> {
@@ -48,6 +48,10 @@ export class AuthService {
         return response;
       }),
     );
+  }
+
+  logout(){
+    this.user.next(null);
   }
   
   resetPass(user: UserAuthModel): Observable<ResponseModel | null> {

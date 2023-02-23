@@ -36,7 +36,7 @@ li:first-child {
     line-height: 39px;
 }
 
-li:last-child {
+li.action-btn {
     margin: 0 32px 0 auto;
 }
 

@@ -16,7 +16,7 @@ const routes: Routes = [
     {path: ":id", component: AnswerComponent},
   ]},
   {path: "pricing", component: PricingComponent},
-  {path:"auth", redirectTo: "auth/signup",pathMatch: 'full'},
+  {path:"auth", redirectTo: "auth/login",pathMatch: 'full'},
   {path: "auth/:type", component: AuthComponent},
   {path: "page-not-found", component: PageNotFoundComponent},
   {path: "**", redirectTo: "page-not-found"},

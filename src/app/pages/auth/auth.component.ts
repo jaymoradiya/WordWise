@@ -12,7 +12,7 @@ import { Observable, Subscription } from 'rxjs';
 import { AuthType } from 'src/app/model/auth.type.enum';
 import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { FormGroup, NgForm } from '@angular/forms';
-import { UserModel } from 'src/app/model/user.model';
+import { UserAuthModel } from 'src/app/model/user.model';
 
 type validator = { error: boolean | undefined; message: string };
 @Component({
@@ -69,7 +69,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (!this.authForm?.valid) return;
-    var user: UserModel = this.authForm?.form.value;
+    var user: UserAuthModel = this.authForm?.form.value;
     switch (this.authType) {
       case AuthType.login:
         this.responseOb = this.authService.login(user);

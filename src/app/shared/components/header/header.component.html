@@ -4,6 +4,7 @@
         <li><a routerLink="/translate-it">Translate it</a></li>
         <li><a routerLink="/questions">How it works?</a></li>
         <li><a routerLink="/pricing">Pricing</a></li>
-        <li><a routerLink="/auth">login</a></li>
+        <li class="action-btn" *ngIf="isAuthenticated"><a (click)="onLogout()">logout</a></li>
+        <li class="action-btn" *ngIf="!isAuthenticated"><a routerLink="/auth">login</a></li>
     </ul>
 </header>
