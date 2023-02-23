@@ -1,6 +1,7 @@
 class UserModel {
     email;
     password;
+    otp;
     constructor( email,  password){
         this.email = email;
         this.password = password;

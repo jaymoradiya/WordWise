@@ -140,8 +140,10 @@
 
 .btn {
     height: 50px;
-    width: 50%;
+    min-width: 50%;
+    max-width: 75%;
     padding-left: 0;
+    padding: 0 32px;
     margin: 0 auto;
     text-align: center;
     display: flex;

@@ -20,6 +20,9 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthComponent } from './auth/auth.component';
 import {  HttpClientModule} from "@angular/common/http";
+import { ForgotPassComponent } from './auth/forgot-pass/forgot-pass.component';
+import { ChangePassComponent } from './auth/change-pass/change-pass.component';
+import { LanguageTransformPipe } from './language-transform.pipe';
 
 
 
@@ -40,6 +43,9 @@ import {  HttpClientModule} from "@angular/common/http";
     LoginComponent,
     SignupComponent,
     AuthComponent,
+    ForgotPassComponent,
+    ChangePassComponent,
+    LanguageTransformPipe,
   ],
   imports: [
     BrowserModule,

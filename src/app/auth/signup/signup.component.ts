@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
+import { AuthType } from 'src/app/model/auth.type.enum';
 import { UserModel } from 'src/app/model/user.model';
 
 type validator= {error: boolean |undefined, message: string};
@@ -29,7 +30,7 @@ export class SignupComponent {
       "email": this.signupForm.form.value.email,
       "password": this.signupForm.form.value.password,
     };
-    this.authService.onSubmit.emit({type: 'signup',data: user});
+    this.authService.onSubmit.emit({type: AuthType.signup,data: user});
   }
 
   emailValidate():validator {

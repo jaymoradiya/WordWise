@@ -1,7 +1,7 @@
 <form class="card-body" [formGroup]="loginForm" (ngSubmit)="onFormSubmit()">
     <div class="input-group">
         <label for="email" class="input-field-label">Email</label>
-        <input type="text" name="email" placeholder="Email" class="input-field" formControlName="email"/>
+        <input type="text" name="email" placeholder="Email" class="input-field" formControlName="email" />
         <div class="error-text" *ngIf="!loginForm?.get('email')?.valid && loginForm?.get('email')?.touched && loginForm?.get('email')?.dirty">Please enter valid email</div>
     </div>
     <div class="input-group">

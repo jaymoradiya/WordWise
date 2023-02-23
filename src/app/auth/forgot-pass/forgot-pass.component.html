@@ -1,0 +1,12 @@
+<form class="card-body" #form="ngForm" (ngSubmit)="onFormSubmit()">
+    <div class="input-group">
+        <label for="email" class="input-field-label">Email</label>
+        <input type="text" name="email" placeholder="Email" class="input-field" ngModel email required/>
+        <div class="error-text" *ngIf="!form?.form?.get('email')?.valid && form?.form?.get('email')?.touched && form?.form?.get('email')?.dirty">Please enter valid email</div>
+    </div>
+   
+    <input type="submit" value="Reset Password" class="btn">
+    <div class="login-info">
+        <p>This form is protected by hCaptcha and its <a href="#" class="link">Privacy Policy</a> and <a href="#" class="link">Terms of Service</a> apply.</p>
+    </div>
+</form>

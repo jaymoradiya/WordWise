@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/auth.service';
+import { AuthType } from 'src/app/model/auth.type.enum';
 import { ResponseModel } from 'src/app/model/response.model';
 import { UserModel } from 'src/app/model/user.model';
 
@@ -11,6 +12,8 @@ import { UserModel } from 'src/app/model/user.model';
 })
 export class LoginComponent implements OnInit{
   loginForm: FormGroup = new FormGroup({});
+
+  sum: number = 0;
 
 
 
@@ -38,7 +41,7 @@ export class LoginComponent implements OnInit{
       "email": this.loginForm.value.email,
       "password": this.loginForm.value.password,
     };
-    this.authService.onSubmit.emit({type: 'login',data: user});
+    this.authService.onSubmit.emit({type: AuthType.login,data: user});
   }
 
 

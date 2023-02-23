@@ -9,6 +9,9 @@ import { TranslateContainerComponent } from './translate-container/translate-con
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { AuthComponent } from './auth/auth.component';
+import { ForgotPassComponent } from './auth/forgot-pass/forgot-pass.component';
+import { ChangePassComponent } from './auth/change-pass/change-pass.component';
+import { AuthType } from './model/auth.type.enum';
 
 const routes: Routes = [
   {path: "", component: HomePageComponent},
@@ -21,8 +24,10 @@ const routes: Routes = [
   {path:"auth", redirectTo: "auth/signup",pathMatch: 'full'},
   {path: "auth", component: AuthComponent, 
   children: [
-    {path: "login", component: LoginComponent},
-    {path: "signup", component: SignupComponent},
+    {path: "login", component: LoginComponent, data: {'type': AuthType.login}},
+    {path: "signup", component: SignupComponent, data: {'type': AuthType.signup}},
+    {path: "forgotPass", component: ForgotPassComponent, data: {'type': AuthType.forgotPass}},
+    {path: "change-pass", component: ChangePassComponent, data: {'type': AuthType.changePass}},
   ],
   },
   {path: "signup", component: SignupComponent},
