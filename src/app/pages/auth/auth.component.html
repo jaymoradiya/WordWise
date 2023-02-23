@@ -18,8 +18,8 @@
             class="nav-item" 
             [ngClass]="{active: authType != AuthTypes.login}">Sign up</a>
         </div>
-        <div class="response-card" [ngClass]="messageClasses(res)" *ngIf="(response | async) as res">
-            {{ res.message}}
+        <div class="response-card" [ngClass]="messageClasses(response)" *ngIf="response">
+            {{ response.message}}
             <span class="close-btn" (click)="closeMessage()">x</span>
         </div>
         <ng-container [ngSwitch]="authType">

@@ -1,6 +1,11 @@
 export interface ResponseModel {
-    error:string;
-    message: string;
-    token: number;
-    opt: number | null;
+    localId: string,
+    email: string,
+    displayName: string,
+    idToken: string,
+    registered: boolean,
+    refreshToken: string,
+    expiresIn: string,
+    code?: number,
+    message? : string,
 }

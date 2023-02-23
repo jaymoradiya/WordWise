@@ -1,26 +1,31 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ResponseModel } from '../../model/response.model';
 
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { AuthType } from 'src/app/model/auth.type.enum';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { FormGroup, NgForm } from '@angular/forms';
 import { UserModel } from 'src/app/model/user.model';
 
-type validator= {error: boolean |undefined, message: string};
+type validator = { error: boolean | undefined; message: string };
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class AuthComponent implements OnInit {
-  
-  @ViewChild("authForm")
+export class AuthComponent implements OnInit, OnDestroy {
+  @ViewChild('authForm')
   authForm: NgForm | undefined;
 
-  @ViewChild("signupForm")
+  @ViewChild('signupForm')
   signupForm: NgForm | undefined;
 
   @ViewChild('resetForm')
@@ -28,7 +33,9 @@ export class AuthComponent implements OnInit {
 
   authType: AuthType = AuthType.signup;
   AuthTypes = AuthType;
-  response: Observable<ResponseModel> | undefined;
+  response: ResponseModel | null | undefined;
+  responseOb: Observable<ResponseModel | null> | undefined;
+  responseSub: Subscription | undefined;
 
   pageInfo: {
     title: string;
@@ -56,44 +63,71 @@ export class AuthComponent implements OnInit {
     });
   }
 
+  ngOnDestroy(): void {
+    this.responseSub?.unsubscribe();
+  }
 
-  onSubmit(){
+  onSubmit() {
     if (!this.authForm?.valid) return;
     var user: UserModel = this.authForm?.form.value;
-    switch (this.authType){
+    switch (this.authType) {
       case AuthType.login:
-        this.response = this.authService.login(user);
+        this.responseOb = this.authService.login(user);
         break;
       case AuthType.signup:
-        this.response = this.authService.signup(user);
+        this.responseOb = this.authService.signup(user);
         break;
       case AuthType.resetPass:
-        this.response = this.authService.resetPass(user);
+        this.responseOb = this.authService.resetPass(user);
         break;
     }
 
+    try {
+      this.responseSub = this.responseOb?.subscribe(
+        (res) => {
+          this.response = res;
+        },
+        (err) => {
+          console.log("error occurred!!");
+          
+          this.response = err;
+        },
+        null
+      );
+    } catch (error) {}
   }
 
-  emailValidate():validator {
+  emailValidate(): validator {
     return {
-      "error":
-      !(this.authForm?.form.get("email")?.valid) && this.authForm?.form.get("email")?.touched && this.authForm?.form.get("email")?.dirty,
-      message: "please enter valid email"
+      error:
+        (!this.authForm?.form.get('email')?.valid &&
+          this.authForm?.form.get('email')?.touched &&
+          this.authForm?.form.get('email')?.dirty) == true,
+      message: 'please enter valid email',
     };
   }
-  passValidate():validator {
+  passValidate(): validator {
     return {
-      "error":
-      !(this.authForm?.form.get("password")?.valid) && this.authForm?.form.get("password")?.touched && this.authForm?.form.get("password")?.dirty ,
-      message: "please enter valid password" + ( this.authForm?.form.get("password")?.value.length < 6 ?", must be greater than 6 char" :"")
+      error:
+        (!this.authForm?.form.get('password')?.valid &&
+          this.authForm?.form.get('password')?.touched &&
+          this.authForm?.form.get('password')?.dirty) == true,
+      message:
+        'please enter valid password' +
+        (this.authForm?.form.get('password')?.value.length < 6
+          ? ', must be greater than 6 char'
+          : ''),
     };
   }
-  cPassValidate():validator {
+  cPassValidate(): validator {
     return {
-      "error":
-      (this.authForm?.form.get("cPassword")?.touched &&  this.authForm?.form.get("cPassword")?.dirty)
-      && (!(this.authForm?.form.get("password")?.valid) || (this.authForm?.form.get("password")?.value != this.authForm?.form.get("cPassword")?.value)),
-      message: "password doesn't match"
+      error:
+        (this.authForm?.form.get('cPassword')?.touched &&
+          this.authForm?.form.get('cPassword')?.dirty &&
+          (!this.authForm?.form.get('password')?.valid ||
+            this.authForm?.form.get('password')?.value !=
+              this.authForm?.form.get('cPassword')?.value)) == true,
+      message: "password doesn't match",
     };
   }
 
@@ -102,10 +136,10 @@ export class AuthComponent implements OnInit {
       case AuthType.login:
         this.authType = AuthType.login;
         break;
-      case  AuthType.signup:
+      case AuthType.signup:
         this.authType = AuthType.signup;
         break;
-      case  AuthType.resetPass:
+      case AuthType.resetPass:
         this.authType = AuthType.resetPass;
         break;
     }
@@ -151,8 +185,8 @@ export class AuthComponent implements OnInit {
 
   messageClasses(res: ResponseModel) {
     return {
-      error: res?.error,
-      success: !res?.error,
+      error: !res?.code,
+      success: res?.code,
       visible: res,
     };
   }

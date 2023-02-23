@@ -4,10 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {  HttpClientModule} from "@angular/common/http";
+import {  HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './pages/header/header.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 import { HomeInfoComponent } from './pages/home-page/home-info/home-info.component';
 import { InputCardComponent } from './pages/home-page/input-card/input-card.component';
 import { TranslateContainerComponent } from './pages/translate-container/translate-container.component';
@@ -20,6 +20,7 @@ import { QuestionComponent } from './pages/how-it-works/questions-list/question/
 import { QuestionsListComponent } from './pages/how-it-works/questions-list/questions-list.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
+import { LoggingInterceptorInterceptor } from './core/services/interceptor/logging-interceptor.interceptor';
 
 
 @NgModule({
@@ -46,7 +47,13 @@ import { PricingComponent } from './pages/pricing/pricing.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: LoggingInterceptorInterceptor, 
+      multi: true, 
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
