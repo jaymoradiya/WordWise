@@ -1,6 +1,6 @@
 export enum AuthType {
     login = "login",
     signup = "signup",
-    forgotPass = "forgotPass",
+    resetPass = "reset-pass",
     changePass = "changePass",
 }

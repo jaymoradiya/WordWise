@@ -35,7 +35,7 @@ export class AuthService {
       "password": user.password,
     });
   }
-  sendOtp(user: UserModel): Observable<ResponseModel> {
+  resetPass(user: UserModel): Observable<ResponseModel> {
     return  this.http.post<ResponseModel>(this.URL+"sendOtp", {
       "email": user.email,
     });
