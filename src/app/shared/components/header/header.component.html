@@ -1,10 +1,11 @@
 <header>
     <ul>
         <li><a routerLink="" class="logo">WordWise</a></li>
-        <li><a routerLink="/translate-it">Translate it</a></li>
-        <li><a routerLink="/questions">How it works?</a></li>
-        <li><a routerLink="/pricing">Pricing</a></li>
-        <li class="action-btn" *ngIf="isAuthenticated"><a (click)="onLogout()">logout</a></li>
+        <li *ngIf="isAuthenticated && user?.email != config.ADMIN.EMAIL"><a routerLink="/translate-it">Translate it</a></li>
+        <li *ngIf="isAuthenticated && user?.email == config.ADMIN.EMAIL"><a routerLink="/dashboard">Dashboard</a></li>
+        <li *ngIf="!isAuthenticated"><a routerLink="/questions">How it works?</a></li>
+        <li *ngIf="!isAuthenticated"><a routerLink="/pricing">Pricing</a></li>
+        <li class="action-btn" *ngIf="isAuthenticated"><a (click)="onProfile()">Profile</a></li>
         <li class="action-btn" *ngIf="!isAuthenticated"><a routerLink="/auth">login</a></li>
     </ul>
 </header>

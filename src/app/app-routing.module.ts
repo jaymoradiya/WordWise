@@ -9,7 +9,8 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { TranslateContainerComponent } from './pages/translate-container/translate-container.component';
 import { AuthGuard } from './auth.guard';
 import { UserComponent } from './pages/user/user.component';
-import { LoginGuard } from './login.guard';
+import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   {path: "", component: HomePageComponent},
@@ -19,11 +20,13 @@ const routes: Routes = [
     {path: ":id", component: AnswerComponent},
   ]},
   {path: "pricing", component: PricingComponent},
+  {path:"auth", redirectTo: "auth/login",pathMatch: 'full'},
+  {path: "auth/:type", component: AuthComponent,  canActivate: [AuthGuard]},
   {path: "user", redirectTo: 'auth/login',pathMatch:'full'},
   {path: "user/:id", component: UserComponent, canActivate: [AuthGuard]},
-  {path:"auth", redirectTo: "auth/login",pathMatch: 'full'},
-  {path: "auth/:type", component: AuthComponent,  canActivate: [LoginGuard]},
+  {path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
   {path: "page-not-found", component: PageNotFoundComponent},
+  {path: "permission-denied", component: PermissionDeniedComponent},
   {path: "**", redirectTo: "page-not-found"},
 ];
 @NgModule({

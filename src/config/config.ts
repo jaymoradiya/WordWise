@@ -9,5 +9,8 @@ export const CONFIG = {
     },
     STRING: {
         USER_DATA : 'userData',
+    },
+    ADMIN: {
+        EMAIL: "jay@gmail.com"
     }
 }

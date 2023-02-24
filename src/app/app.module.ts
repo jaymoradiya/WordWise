@@ -23,6 +23,8 @@ import { PricingComponent } from './pages/pricing/pricing.component';
 import { LoggingInterceptorInterceptor } from './core/services/interceptor/logging-interceptor.interceptor';
 import { LoaderComponent } from './loader/loader.component';
 import { UserComponent } from './pages/user/user.component';
+import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -43,6 +45,8 @@ import { UserComponent } from './pages/user/user.component';
     LanguageTransformPipe,
     LoaderComponent,
     UserComponent,
+    PermissionDeniedComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
