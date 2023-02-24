@@ -21,6 +21,7 @@ import { QuestionsListComponent } from './pages/how-it-works/questions-list/ques
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
 import { LoggingInterceptorInterceptor } from './core/services/interceptor/logging-interceptor.interceptor';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { LoggingInterceptorInterceptor } from './core/services/interceptor/loggi
     PageNotFoundComponent,
     AuthComponent,
     LanguageTransformPipe,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

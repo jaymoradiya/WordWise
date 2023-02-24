@@ -37,6 +37,8 @@ export class AuthComponent implements OnInit, OnDestroy {
   responseOb: Observable<ResponseModel | null> | undefined;
   responseSub: Subscription | undefined;
 
+  isLoading = false;
+
   pageInfo: {
     title: string;
     subtitle_prefix: string;
@@ -69,6 +71,7 @@ export class AuthComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (!this.authForm?.valid) return;
+    this.isLoading = true;
     var user: UserAuthModel = this.authForm?.form.value;
     switch (this.authType) {
       case AuthType.login:
@@ -82,19 +85,19 @@ export class AuthComponent implements OnInit, OnDestroy {
         break;
     }
 
-    try {
-      this.responseSub = this.responseOb?.subscribe(
-        (res) => {
-          this.response = res;
-        },
-        (err) => {
-          console.log("error occurred!!");
-          
-          this.response = err;
-        },
-        null
-      );
-    } catch (error) {}
+    this.responseSub = this.responseOb?.subscribe(
+      (res) => {
+        this.response = res;
+        this.isLoading = false;
+      },
+      (err) => {
+        console.log("error occurred!!");
+        this.isLoading = false;
+        this.response = err;
+      },
+      null
+    );
+    
   }
 
   emailValidate(): validator {

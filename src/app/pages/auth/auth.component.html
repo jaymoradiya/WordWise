@@ -1,4 +1,7 @@
-<div class="container">
+<div [class]="{'container': true, 'loader': isLoading}">
+    <div style="text-align: center;" class="progress-loader" *ngIf="isLoading">
+        <app-loader></app-loader>
+    </div>
     <div class="page-title-wrapper">
         <div class="page-title">{{ pageInfo.title}} </div>
         <div class="page-info">{{ pageInfo.subtitle_prefix}} 
@@ -9,6 +12,7 @@
             {{ pageInfo.subtitle_suffix}}
         </div>
     </div>
+    
     <div class="card">
         <div class="nav-card-tabs" *ngIf="authType != AuthTypes.resetPass">
             <a (click)="changeAuthAndNavigate(AuthTypes.login)" 
