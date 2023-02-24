@@ -20,4 +20,8 @@ export class UserComponent implements OnInit{
       })
   }
 
+  onLogout(){
+    this.authService.logout();
+  }
+
 }

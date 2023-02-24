@@ -28,5 +28,5 @@ export class UserModel {
 export interface UserAuthModel {
     email: string,
     password: string,
-    otp? : number,
+    rememberMe? : boolean,
 }

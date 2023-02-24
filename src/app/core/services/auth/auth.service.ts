@@ -7,6 +7,7 @@ import { ResponseModel } from '../../../model/response.model';
 import { EventEmitter, Output } from '@angular/core';
 import {  CONFIG } from "../../../../config/config";
 import { CoreHttpService } from '../../../shared/http/core-http.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class AuthService {
   user = new BehaviorSubject<UserModel | null>( null);
   autoLogoutTimer :any;
 
-  constructor(private httpCore: CoreHttpService) { }
+  constructor(private httpCore: CoreHttpService,private router:Router) { }
 
   login(user: UserAuthModel): Observable<ResponseModel | null> {
     return this.httpCore.post<ResponseModel>(CONFIG.API.LOGIN, {
@@ -29,7 +30,7 @@ export class AuthService {
         if (response){
           response.message = "Logged in successfully";
           response.code = res.status;
-          this.handleAuthentication(response);
+          this.handleAuthentication(response,user.rememberMe);
         }
         return response;
       }),
@@ -80,7 +81,8 @@ export class AuthService {
       clearInterval(this.autoLogoutTimer);
     }
     this.autoLogoutTimer = null;
-  }
+    this.router.navigate(['']);
+  } 
 
   autoLogout(expirationTimeLeft: number){
     this.autoLogoutTimer = setInterval(()=> {
@@ -107,7 +109,6 @@ export class AuthService {
     return  this.httpCore.post<ResponseModel>(CONFIG.API.CONFIRM_PASS, {
       "email": user.email,
       "password": user.password ,
-      "otp": user.otp,
     }).pipe(
       map((res) => {
         let response = res.body;
@@ -120,7 +121,7 @@ export class AuthService {
     );
   }
 
-  handleAuthentication(response: ResponseModel){
+  handleAuthentication(response: ResponseModel,rememberMe?:boolean | undefined){
     console.log(response);
     const expirationDate = new Date(
       new Date().getTime() + (+response.expiresIn * 1000)
@@ -132,7 +133,9 @@ export class AuthService {
       response.refreshToken,
       expirationDate,
     );
-    localStorage.setItem(CONFIG.STRING.USER_DATA,JSON.stringify(userData));
+    if (rememberMe){
+      localStorage.setItem(CONFIG.STRING.USER_DATA,JSON.stringify(userData));
+    }
     this.autoLogout(+response.expiresIn*1000);
     this.user.next(userData);
   }

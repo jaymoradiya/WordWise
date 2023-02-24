@@ -1,7 +1,5 @@
-<div [class]="{'container': true, 'loader': isLoading}">
-    <div style="text-align: center;" class="progress-loader" *ngIf="isLoading">
-        <app-loader></app-loader>
-    </div>
+<app-loader *ngIf="isLoading"></app-loader>
+<div class="container">
     <div class="page-title-wrapper">
         <div class="page-title">{{ pageInfo.title}} </div>
         <div class="page-info">{{ pageInfo.subtitle_prefix}} 
@@ -72,6 +70,7 @@
         <div class="input-group">
             <input type="checkbox" 
             name="rememberMe" 
+            ngModel
             class="input-checkbox"/>
             <label for="rememberMe" class="input-checkbox-label" >Remember me</label>
         </div>
