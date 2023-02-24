@@ -8,17 +8,21 @@ import { HowItWorksComponent } from './pages/how-it-works/how-it-works.component
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { TranslateContainerComponent } from './pages/translate-container/translate-container.component';
 import { AuthGuard } from './auth.guard';
+import { UserComponent } from './pages/user/user.component';
+import { LoginGuard } from './login.guard';
 
 const routes: Routes = [
   {path: "", component: HomePageComponent},
-  {path: "translate-it", component: TranslateContainerComponent, canActivate: [AuthGuard]},
+  {path: "translate-it", component: TranslateContainerComponent},
   {path: "questions", component: HowItWorksComponent,
   children: [
     {path: ":id", component: AnswerComponent},
   ]},
   {path: "pricing", component: PricingComponent},
+  {path: "user", redirectTo: 'auth/login',pathMatch:'full'},
+  {path: "user/:id", component: UserComponent, canActivate: [AuthGuard]},
   {path:"auth", redirectTo: "auth/login",pathMatch: 'full'},
-  {path: "auth/:type", component: AuthComponent},
+  {path: "auth/:type", component: AuthComponent,  canActivate: [LoginGuard]},
   {path: "page-not-found", component: PageNotFoundComponent},
   {path: "**", redirectTo: "page-not-found"},
 ];

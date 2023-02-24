@@ -89,6 +89,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       (res) => {
         this.response = res;
         this.isLoading = false;
+        this.router.navigate(['user', this.response!.localId]);
       },
       (err) => {
         console.log("error occurred!!");
@@ -97,7 +98,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       },
       null
     );
-    
+
   }
 
   emailValidate(): validator {

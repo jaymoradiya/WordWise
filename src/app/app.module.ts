@@ -22,6 +22,7 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
 import { PricingComponent } from './pages/pricing/pricing.component';
 import { LoggingInterceptorInterceptor } from './core/services/interceptor/logging-interceptor.interceptor';
 import { LoaderComponent } from './loader/loader.component';
+import { UserComponent } from './pages/user/user.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { LoaderComponent } from './loader/loader.component';
     AuthComponent,
     LanguageTransformPipe,
     LoaderComponent,
+    UserComponent,
   ],
   imports: [
     BrowserModule,
