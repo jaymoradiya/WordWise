@@ -25,6 +25,8 @@ import { LoaderComponent } from './loader/loader.component';
 import { UserComponent } from './pages/user/user.component';
 import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ProfileIconComponent } from './shared/components/profile-icon/profile-icon.component';
+import { ThemeBtnComponent } from './shared/components/theme-btn/theme-btn.component';
 
 
 @NgModule({
@@ -47,6 +49,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
     UserComponent,
     PermissionDeniedComponent,
     DashboardComponent,
+    ProfileIconComponent,
+    ThemeBtnComponent,
   ],
   imports: [
     BrowserModule,
