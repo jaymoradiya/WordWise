@@ -18,6 +18,6 @@ export class UserService {
   constructor(private httpCore: CoreHttpService, private authService:AuthService ) { }
 
   getUserData(){
-    // this.httpCore.post()
+    this.httpCore.post()
   }
 }

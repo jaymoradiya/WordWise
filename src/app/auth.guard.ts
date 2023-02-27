@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate {
               return this.router.createUrlTree(['permission-denied']);
           }
           return this.router.createUrlTree(['/auth']);
-        }else if (route.url[0].path == 'user') {
+        }else if (route.url[0].path == 'profile') {
           if(isAuth) {
               return true;
           }
@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate {
           if(!isAuth) {
             return true;
           }
-          return this.router.createUrlTree(['user',user!.id]);
+          return this.router.createUrlTree(['profile']);
         }
         return this.router.createUrlTree(['']);
 

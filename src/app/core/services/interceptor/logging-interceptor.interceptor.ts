@@ -21,7 +21,6 @@ export class LoggingInterceptorInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
     let newRequest = request.clone({
-      url: CONFIG.API.BASE_URL + request.url,
       params: request.params.append('key', CONFIG.API.KEY),
     });
     console.log(`${newRequest.method} --> ${request.url}`);

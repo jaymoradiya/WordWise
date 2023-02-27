@@ -20,7 +20,7 @@ export class AuthService {
   constructor(private httpCore: CoreHttpService,private router:Router) { }
 
   login(user: UserAuthModel): Observable<ResponseModel | null> {
-    return this.httpCore.post<ResponseModel>(CONFIG.API.LOGIN, {
+    return this.httpCore.post<ResponseModel>(CONFIG.API.BASE_URL+CONFIG.API.LOGIN, {
       "email": user.email,
       "password": user.password,
       "returnSecureToken": true,
@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   signup(user: UserAuthModel): Observable<ResponseModel | null> {
-    return this.httpCore.post<ResponseModel>(CONFIG.API.SIGNUP, {
+    return this.httpCore.post<ResponseModel>(CONFIG.API.BASE_URL+CONFIG.API.SIGNUP, {
       "email": user.email,
       "password": user.password,
       "returnSecureToken": true,
@@ -91,7 +91,7 @@ export class AuthService {
   }
   
   resetPass(user: UserAuthModel): Observable<ResponseModel | null> {
-    return  this.httpCore.post<ResponseModel>(CONFIG.API.RESET_PASS, {
+    return  this.httpCore.post<ResponseModel>(CONFIG.API.BASE_URL+CONFIG.API.RESET_PASS, {
       "email": user.email,
     }).pipe(
       map((res) => {
@@ -106,7 +106,7 @@ export class AuthService {
   }
 
   verifyOtpAndChangePass(user: UserAuthModel): Observable<ResponseModel | null> {
-    return  this.httpCore.post<ResponseModel>(CONFIG.API.CONFIRM_PASS, {
+    return  this.httpCore.post<ResponseModel>(CONFIG.API.BASE_URL+CONFIG.API.CONFIRM_PASS, {
       "email": user.email,
       "password": user.password ,
     }).pipe(

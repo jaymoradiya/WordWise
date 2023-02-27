@@ -193,6 +193,7 @@
 .link:hover,
 .link:focus {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .response-card {

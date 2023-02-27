@@ -3,11 +3,11 @@ import { AuthService } from 'src/app/core/services/auth/auth.service';
 import { UserModel } from 'src/app/model/user.model';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class UserComponent implements OnInit{
+export class ProfileComponent implements OnInit{
 
   user: UserModel | null | undefined;
 

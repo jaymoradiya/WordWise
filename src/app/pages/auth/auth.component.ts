@@ -89,7 +89,7 @@ export class AuthComponent implements OnInit, OnDestroy {
       (res) => {
         this.response = res;
         this.isLoading = false;
-        this.router.navigate(['user', this.response!.localId]);
+        this.router.navigate(['profile']);
       },
       (err) => {
         console.log("error occurred!!");

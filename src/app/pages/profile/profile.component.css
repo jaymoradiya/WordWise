@@ -1,0 +1,16 @@
+.container {
+    width: 100%;
+    text-align: center;
+    padding: 56px;
+    color: #fff;
+     background: linear-gradient(90deg,#86aed8,#93e3c0);;
+}
+
+.title {
+    margin-bottom: 12px;
+    font-size: 3rem;
+}
+
+.email {
+    font-size: 1.2rem;
+}

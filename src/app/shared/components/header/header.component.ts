@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy{
 
 
   onProfile(){
-    this.router.navigate(['user', this.user?.id]);
+    this.router.navigate(['profile']);
   }
 
 }
