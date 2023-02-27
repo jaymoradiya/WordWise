@@ -9,10 +9,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResponseModel } from '../../model/response.model';
 
 import { Observable, Subscription } from 'rxjs';
-import { AuthType } from 'src/app/model/auth.type.enum';
-import { AuthService } from 'src/app/core/services/auth/auth.service';
+import { AuthType } from 'src/app/model/enum/auth-type.enum';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { FormGroup, NgForm } from '@angular/forms';
-import { UserAuthModel } from 'src/app/model/user.model';
+import { UserAuthModel } from 'src/app/model/user-auth.model';
 
 type validator = { error: boolean | undefined; message: string };
 @Component({
@@ -92,13 +92,12 @@ export class AuthComponent implements OnInit, OnDestroy {
         this.router.navigate(['profile']);
       },
       (err) => {
-        console.log("error occurred!!");
+        console.log('error occurred!!');
         this.isLoading = false;
         this.response = err;
       },
       null
     );
-
   }
 
   emailValidate(): validator {

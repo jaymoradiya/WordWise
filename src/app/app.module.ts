@@ -2,9 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {  HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/components/header/header.component';
@@ -20,14 +19,13 @@ import { QuestionComponent } from './pages/how-it-works/questions-list/question/
 import { QuestionsListComponent } from './pages/how-it-works/questions-list/questions-list.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
-import { LoggingInterceptorInterceptor } from './core/services/interceptor/logging-interceptor.interceptor';
 import { LoaderComponent } from './shared/components/loader/loader.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileIconComponent } from './shared/components/profile-icon/profile-icon.component';
 import { ThemeBtnComponent } from './shared/components/theme-btn/theme-btn.component';
-
+import { LogInterceptor } from './shared/interceptor/log.interceptor';
 
 @NgModule({
   declarations: [
@@ -57,15 +55,15 @@ import { ThemeBtnComponent } from './shared/components/theme-btn/theme-btn.compo
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
-    { 
-      provide: HTTP_INTERCEPTORS, 
-      useClass: LoggingInterceptorInterceptor, 
-      multi: true, 
-    }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LogInterceptor,
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
