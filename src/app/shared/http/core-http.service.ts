@@ -43,4 +43,33 @@ export class CoreHttpService {
       params: params,
     });
   }
+  get<T>(
+    url: string,
+    headers?:
+      | HttpHeaders
+      | {
+          [header: string]: string | string[];
+        }
+      | undefined,
+    params?:
+      | HttpParams
+      | {
+          [param: string]:
+            | string
+            | number
+            | boolean
+            | ReadonlyArray<string | number | boolean>;
+        }
+  ): Observable<HttpResponse<T>> {
+
+    let defaultHeader = new HttpHeaders();
+    defaultHeader = 
+      defaultHeader.append('Content-Type', 'application/json');
+    
+    return this.http.get<T>(url, {
+      headers: headers ?? defaultHeader,
+      observe: 'response',
+      params: params,
+    });
+  }
 }

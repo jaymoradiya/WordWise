@@ -8,6 +8,7 @@ export const CONFIG = {
         "SIGN_IN_WITH_PROVIDER": "/accounts:signInWithIdp",
         "RESET_PASS": "/accounts:resetPassword",
         "CONFIRM_PASS": "/accounts:resetPassword",
+        "USERS": "/users"
     },
     STRING: {
         USER_DATA : 'userData',

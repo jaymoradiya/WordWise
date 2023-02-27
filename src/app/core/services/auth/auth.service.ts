@@ -8,6 +8,7 @@ import { EventEmitter, Output } from '@angular/core';
 import {  CONFIG } from "../../../../config/config";
 import { CoreHttpService } from '../../../shared/http/core-http.service';
 import { Router } from '@angular/router';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class AuthService {
   user = new BehaviorSubject<UserModel | null>( null);
   autoLogoutTimer :any;
 
-  constructor(private httpCore: CoreHttpService,private router:Router) { }
+  constructor(private httpCore: CoreHttpService,private router:Router, private userService: UserService) { }
 
   login(user: UserAuthModel): Observable<ResponseModel | null> {
     return this.httpCore.post<ResponseModel>(CONFIG.API.BASE_URL+CONFIG.API.LOGIN, {
@@ -30,7 +31,7 @@ export class AuthService {
         if (response){
           response.message = "Logged in successfully";
           response.code = res.status;
-          this.handleAuthentication(response,user.rememberMe);
+          this.handleAuthentication(response,false,user.rememberMe);
         }
         return response;
       }),
@@ -67,7 +68,8 @@ export class AuthService {
         if (response){
           response.message = "Signup successfully";
           response.code = res.status;
-          this.handleAuthentication(response);
+          
+          this.handleAuthentication(response,true,true);
         }
         return response;
       }),
@@ -121,8 +123,7 @@ export class AuthService {
     );
   }
 
-  handleAuthentication(response: ResponseModel,rememberMe?:boolean | undefined){
-    console.log(response);
+  handleAuthentication(response: ResponseModel,isNewUser: boolean,rememberMe?:boolean | undefined,){
     const expirationDate = new Date(
       new Date().getTime() + (+response.expiresIn * 1000)
     )
@@ -135,6 +136,9 @@ export class AuthService {
     );
     if (rememberMe){
       localStorage.setItem(CONFIG.STRING.USER_DATA,JSON.stringify(userData));
+    }
+    if(isNewUser){
+      this.userService.saveUser(userData).subscribe(val => console.log('users saved'));
     }
     this.autoLogout(+response.expiresIn*1000);
     this.user.next(userData);

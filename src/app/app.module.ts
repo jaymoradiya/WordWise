@@ -21,8 +21,8 @@ import { QuestionsListComponent } from './pages/how-it-works/questions-list/ques
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PricingComponent } from './pages/pricing/pricing.component';
 import { LoggingInterceptorInterceptor } from './core/services/interceptor/logging-interceptor.interceptor';
-import { LoaderComponent } from './loader/loader.component';
-import { UserComponent } from './pages/user/user.component';
+import { LoaderComponent } from './shared/components/loader/loader.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 import { PermissionDeniedComponent } from './pages/permission-denied/permission-denied.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ProfileIconComponent } from './shared/components/profile-icon/profile-icon.component';
@@ -46,7 +46,7 @@ import { ThemeBtnComponent } from './shared/components/theme-btn/theme-btn.compo
     AuthComponent,
     LanguageTransformPipe,
     LoaderComponent,
-    UserComponent,
+    ProfileComponent,
     PermissionDeniedComponent,
     DashboardComponent,
     ProfileIconComponent,

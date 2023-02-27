@@ -23,6 +23,15 @@ export class UserModel {
            new Date(json['_expireAt']),
         );
     }
+
+     toJson(){
+        return {
+            'email': this.email,
+            'id': this.id,
+            '_token': this._token,
+            '_refreshToken': this._refreshToken
+        };
+    }
 }
 
 export interface UserAuthModel {
