@@ -14,7 +14,8 @@ import { AuthService } from './auth.service';
 })
 export class UserService {
   API = CONFIG.API;
-  constructor(private httpCore: CoreHttpService, private authService:AuthService ) { }
+
+  constructor(private httpCore: CoreHttpService) {}
 
   saveUser(user: UserModel) {
     const header = new HttpHeaders({
