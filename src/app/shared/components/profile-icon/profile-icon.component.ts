@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class ProfileIconComponent {
   @Input()
-  name: string = '';
+  name = '';
 
   get twoLatter() {
     // let arr: string[] = [];
@@ -19,7 +19,7 @@ export class ProfileIconComponent {
     //   arr = ["User"];
     //   latter = arr[0][0];
     // }
-    let latter = this.name[0];
+    const latter = this.name[0];
     return latter.toUpperCase();
   }
 }

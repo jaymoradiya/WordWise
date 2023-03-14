@@ -32,17 +32,44 @@ export class CoreHttpService {
             | ReadonlyArray<string | number | boolean>;
         }
   ): Observable<HttpResponse<T>> {
-
     let defaultHeader = new HttpHeaders();
-    defaultHeader = 
-      defaultHeader.append('Content-Type', 'application/json');
-    
+    defaultHeader = defaultHeader.append('Content-Type', 'application/json');
+
     return this.http.post<T>(url, body, {
       headers: headers ?? defaultHeader,
       observe: 'response',
       params: params,
     });
   }
+  put<T>(
+    url: string,
+    body?: any,
+    headers?:
+      | HttpHeaders
+      | {
+          [header: string]: string | string[];
+        }
+      | undefined,
+    params?:
+      | HttpParams
+      | {
+          [param: string]:
+            | string
+            | number
+            | boolean
+            | ReadonlyArray<string | number | boolean>;
+        }
+  ): Observable<HttpResponse<T>> {
+    let defaultHeader = new HttpHeaders();
+    defaultHeader = defaultHeader.append('Content-Type', 'application/json');
+
+    return this.http.put<T>(url, body, {
+      headers: headers ?? defaultHeader,
+      observe: 'response',
+      params: params,
+    });
+  }
+
   get<T>(
     url: string,
     headers?:
@@ -61,11 +88,9 @@ export class CoreHttpService {
             | ReadonlyArray<string | number | boolean>;
         }
   ): Observable<HttpResponse<T>> {
-
     let defaultHeader = new HttpHeaders();
-    defaultHeader = 
-      defaultHeader.append('Content-Type', 'application/json');
-    
+    defaultHeader = defaultHeader.append('Content-Type', 'application/json');
+
     return this.http.get<T>(url, {
       headers: headers ?? defaultHeader,
       observe: 'response',

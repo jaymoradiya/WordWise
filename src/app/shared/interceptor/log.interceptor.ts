@@ -13,13 +13,11 @@ import { CONFIG } from 'src/config/config';
 
 @Injectable()
 export class LogInterceptor implements HttpInterceptor {
-  constructor() {}
-
   intercept(
     request: HttpRequest<unknown>,
     next: HttpHandler
   ): Observable<HttpEvent<unknown>> {
-    let newRequest = request.clone({
+    const newRequest = request.clone({
       params: request.params.append('key', CONFIG.API.KEY),
     });
     console.log(`${newRequest.method} --> ${request.url}`);
@@ -33,41 +31,41 @@ export class LogInterceptor implements HttpInterceptor {
             `RES[${res.status}] <-- ${JSON.stringify(res.body, null, '\t')}`
           );
         }
-      }),
-      catchError((resError: HttpErrorResponse) => {
-        console.log(
-          `ERROR[${resError.status}] <-- ${JSON.stringify(
-            resError.error,
-            null,
-            '\t'
-          )}`
-        );
-        const error: { message: string; code: number } = {
-          message: 'Unknown error occurred!',
-          code: resError.status,
-        };
-
-        switch (resError.error.error.message) {
-          case 'EMAIL_NOT_FOUND':
-            error.message = "user with this email doesn't exist.";
-            break;
-          case 'INVALID_PASSWORD':
-            error.message = 'incorrect password.';
-            break;
-          case 'EMAIL_EXISTS':
-            error.message = 'user with this email already exist.';
-            break;
-          case 'OPERATION_NOT_ALLOWED':
-            error.message = 'you are not allowed to signup.';
-            break;
-          case 'TOO_MANY_ATTEMPTS_TRY_LATER':
-            error.message = 'too many attempts, try again later!';
-            break;
-        }
-        return throwError(
-          () => new Error(error.message, { cause: error.code })
-        );
       })
+      // catchError((resError: HttpErrorResponse) => {
+      //   console.log(
+      //     `ERROR[${resError.status}] <-- ${JSON.stringify(
+      //       resError.error,
+      //       null,
+      //       '\t'
+      //     )}`
+      //   );
+      //   const error: { message: string; code: number } = {
+      //     message: 'Unknown error occurred!',
+      //     code: resError.status,
+      //   };
+
+      //   switch (resError.error.error.message) {
+      //     case 'EMAIL_NOT_FOUND':
+      //       error.message = "user with this email doesn't exist.";
+      //       break;
+      //     case 'INVALID_PASSWORD':
+      //       error.message = 'incorrect password.';
+      //       break;
+      //     case 'EMAIL_EXISTS':
+      //       error.message = 'user with this email already exist.';
+      //       break;
+      //     case 'OPERATION_NOT_ALLOWED':
+      //       error.message = 'you are not allowed to signup.';
+      //       break;
+      //     case 'TOO_MANY_ATTEMPTS_TRY_LATER':
+      //       error.message = 'too many attempts, try again later!';
+      //       break;
+      //   }
+      //   return throwError(
+      //     () => new Error(error.message, { cause: error.code })
+      //   );
+      // })
     );
   }
 }

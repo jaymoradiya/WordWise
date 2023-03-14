@@ -13,13 +13,15 @@ export class UserService {
   constructor(private httpCore: CoreHttpService) {}
 
   saveUser(user: UserModel) {
-    return this.httpCore.post(
-      this.API.DB_BASE_URL + this.API.USERS + '.json',
+    return this.httpCore.put(
+      `${this.API.DB_BASE_URL}${this.API.USERS}/${user.id}.json`,
       user.toJson()
     );
   }
 
-  getUserData() {
-    // this.httpCore.post()
+  getUserData(user: UserModel) {
+    return this.httpCore.get(
+      `${this.API.DB_BASE_URL}${this.API.USERS}/${user.id}.json`
+    );
   }
 }

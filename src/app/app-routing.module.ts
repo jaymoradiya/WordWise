@@ -13,24 +13,29 @@ import { PermissionDeniedComponent } from './pages/permission-denied/permission-
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
-  {path: "", component: HomePageComponent},
-  {path: "translate-it", component: TranslateContainerComponent},
-  {path: "questions", component: HowItWorksComponent,
-  children: [
-    {path: ":id", component: AnswerComponent},
-  ]},
-  {path: "pricing", component: PricingComponent},
-  {path:"auth", redirectTo: "auth/login",pathMatch: 'full'},
-  {path: "auth/:type", component: AuthComponent,  canActivate: [AuthGuard]},
+  { path: '', component: HomePageComponent },
+  { path: 'translate-it', component: TranslateContainerComponent },
+  {
+    path: 'questions',
+    component: HowItWorksComponent,
+    children: [{ path: ':id', component: AnswerComponent }],
+  },
+  { path: 'pricing', component: PricingComponent },
+  { path: 'auth', redirectTo: 'auth/login', pathMatch: 'full' },
+  { path: 'auth/:type', component: AuthComponent, canActivate: [AuthGuard] },
   // {path: "user", redirectTo: 'auth/login',pathMatch:'full'},
-  {path: "profile", component: ProfileComponent, canActivate: [AuthGuard]},
-  {path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard]},
-  {path: "page-not-found", component: PageNotFoundComponent},
-  {path: "permission-denied", component: PermissionDeniedComponent},
-  {path: "**", redirectTo: "page-not-found"},
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'page-not-found', component: PageNotFoundComponent },
+  { path: 'permission-denied', component: PermissionDeniedComponent },
+  { path: '**', redirectTo: 'page-not-found' },
 ];
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

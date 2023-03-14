@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserModel } from 'src/app/model/user.model';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +11,10 @@ import { UserModel } from 'src/app/model/user.model';
 export class ProfileComponent implements OnInit {
   user: UserModel | null | undefined;
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.authService.user.subscribe((user) => {
@@ -18,6 +22,11 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  onSave() {
+    this.userService.saveUser(this.user!).subscribe((res) => {
+      console.log(res);
+    });
+  }
   onLogout() {
     this.authService.logout();
   }

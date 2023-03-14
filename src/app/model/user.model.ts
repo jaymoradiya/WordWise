@@ -14,7 +14,13 @@ export class UserModel {
     return this._token;
   }
 
-  static fromJson(json: any) {
+  static fromJson(json: {
+    email: string;
+    id: string;
+    _token: string;
+    _refreshToken: string;
+    _expireAt: string;
+  }) {
     return new UserModel(
       json['email'],
       json['id'],

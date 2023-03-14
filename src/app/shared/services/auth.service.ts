@@ -1,4 +1,3 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserModel } from '../../model/user.model';
 import { AuthType } from '../../model/enum/auth-type.enum';
@@ -33,7 +32,7 @@ export class AuthService {
       })
       .pipe(
         map((res) => {
-          let response = res.body;
+          const response = res.body;
           if (response) {
             response.message = 'Logged in successfully';
             response.code = res.status;
@@ -73,7 +72,7 @@ export class AuthService {
       })
       .pipe(
         map((res) => {
-          let response = res.body;
+          const response = res.body;
           if (response) {
             response.message = 'Signup successfully';
             response.code = res.status;
@@ -108,7 +107,7 @@ export class AuthService {
       })
       .pipe(
         map((res) => {
-          let response = res.body;
+          const response = res.body;
           if (response) {
             response.message = 'OTP sent to your email!';
             response.code = res.status;
@@ -128,7 +127,7 @@ export class AuthService {
       })
       .pipe(
         map((res) => {
-          let response = res.body;
+          const response = res.body;
           if (response) {
             response.message = 'Password Changed!';
             response.code = res.status;

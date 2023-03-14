@@ -11,7 +11,7 @@ import { ResponseModel } from '../../model/response.model';
 import { Observable, Subscription } from 'rxjs';
 import { AuthType } from 'src/app/model/enum/auth-type.enum';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { UserAuthModel } from 'src/app/model/user-auth.model';
 
 type validator = { error: boolean | undefined; message: string };
@@ -58,7 +58,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    var type = this.route.snapshot.params['type'];
+    const type = this.route.snapshot.params['type'];
     this.changeAuthType(type);
     this.route.params.subscribe((params) => {
       this.changeAuthType(params['type']);
@@ -72,7 +72,7 @@ export class AuthComponent implements OnInit, OnDestroy {
   onSubmit() {
     if (!this.authForm?.valid) return;
     this.isLoading = true;
-    var user: UserAuthModel = this.authForm?.form.value;
+    const user: UserAuthModel = this.authForm?.form.value;
     switch (this.authType) {
       case AuthType.login:
         this.responseOb = this.authService.login(user);
